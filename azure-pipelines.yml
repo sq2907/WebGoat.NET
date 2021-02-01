@@ -33,10 +33,7 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- script: |
-  wget https://github.com/github/codeql-action/releases/latest/download/codeql-runner-linux
-  chmod +x codeql-runner-linux
-  displayName: 'Get latest CodeQL package. Install on Agent.'
+
 - script: |
   ./codeql-runner-linux init \
   --repository sq2907/WebGoat.NET \
