@@ -25,7 +25,6 @@ steps:
   inputs:
     solution: '**/*.sln'
 
-
 - script: |
    wget https://github.com/github/codeql-action/releases/latest/download/codeql-runner-linux
    chmod +x codeql-runner-linux
@@ -38,6 +37,13 @@ steps:
    --github-auth $(GitHub Token) \
   displayName: 'Initialize CodeQL Executable and create a CodeQL database'
 
+strategy:
+   fail-fast: false
+   matrix:
+  language: ['csharp']
+
+
+
 - script: |
    ./codeql-runner-linux analyze \
    --repository sq2907/WebGoat.NET \
@@ -46,5 +52,4 @@ steps:
    --commit $(Build.SourceVersion) \
    --ref $(Build.SourceBranch)
   displayName: 'Populate the CodeQL runner databases, analyze them, and upload the results to GitHub.'
-
 
