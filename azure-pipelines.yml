@@ -37,11 +37,6 @@ steps:
    --github-auth $(GitHub Token) \
   displayName: 'Initialize CodeQL Executable and create a CodeQL database'
 
-strategy:
-   fail-fast: false
-   matrix:
-  language: ['csharp']
-
 
 
 - script: |
