@@ -35,6 +35,10 @@ steps:
    --repository sq2907/WebGoat.NET \
    --github-url https://github.com \
    --github-auth $(GitHub Token) \
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ['csharp', 'cpp', 'javascript']
     uses: github/codeql-action/init@v1
     with:
      languages: ${{ matrix.language }}
@@ -47,9 +51,5 @@ steps:
    --github-auth $(GitHub Token) \
    --commit $(Build.SourceVersion) \
    --ref $(Build.SourceBranch)
-      strategy:
-      fail-fast: false
-      matrix:
-        language: ['csharp', 'cpp', 'javascript']
   displayName: 'Populate the CodeQL runner databases, analyze them, and upload the results to GitHub.'
 
