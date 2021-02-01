@@ -24,9 +24,7 @@ steps:
 - task: MSBuild@1
   inputs:
     solution: '**/*.sln'
-- task: VSBuild@1
-  inputs:
-    solution: '**\*.sln'
+
 - script: |
    wget https://github.com/github/codeql-action/releases/latest/download/codeql-runner-linux
    chmod +x codeql-runner-linux
@@ -37,6 +35,9 @@ steps:
    --repository sq2907/WebGoat.NET \
    --github-url https://github.com \
    --github-auth $(GitHub Token) \
+    uses: github/codeql-action/init@v1
+    with:
+     languages: ${{ matrix.language }}
   displayName: 'Initialize CodeQL Executable and create a CodeQL database'
 
 - script: |
@@ -46,5 +47,9 @@ steps:
    --github-auth $(GitHub Token) \
    --commit $(Build.SourceVersion) \
    --ref $(Build.SourceBranch)
+      strategy:
+      fail-fast: false
+      matrix:
+        language: ['csharp', 'cpp', 'javascript']
   displayName: 'Populate the CodeQL runner databases, analyze them, and upload the results to GitHub.'
 
