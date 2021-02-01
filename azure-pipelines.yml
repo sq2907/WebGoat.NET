@@ -38,6 +38,7 @@ steps:
   chmod +x codeql-runner-linux
   displayName: 'Get latest CodeQL package. Install on Agent.'
 
+
 - script: |
   ./codeql-runner-linux init \
   --repository sq2907/WebGoat.NET \
