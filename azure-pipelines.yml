@@ -39,9 +39,6 @@ steps:
       fail-fast: false
       matrix:
         language: ['csharp', 'cpp', 'javascript']
-    uses: github/codeql-action/init@v1
-    with:
-     languages: ${{ matrix.language }}
   displayName: 'Initialize CodeQL Executable and create a CodeQL database'
 
 - script: |
