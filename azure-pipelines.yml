@@ -21,9 +21,7 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-- task: MSBuild@1
-  inputs:
-    solution: '**/*.sln'
+
 
 - script: |
    wget https://github.com/github/codeql-action/releases/latest/download/codeql-runner-linux
@@ -36,6 +34,10 @@ steps:
    --github-url https://github.com \
    --github-auth $(GitHub Token) \
   displayName: 'Initialize CodeQL Executable and create a CodeQL database'
+
+- task: MSBuild@1
+  inputs:
+    solution: '**/*.sln'
 
 - script: |
    ./codeql-runner-linux analyze \
