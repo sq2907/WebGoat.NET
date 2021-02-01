@@ -35,10 +35,6 @@ steps:
    --repository sq2907/WebGoat.NET \
    --github-url https://github.com \
    --github-auth $(GitHub Token) \
-    strategy:
-      fail-fast: false
-      matrix:
-        language: ['csharp', 'cpp', 'javascript']
   displayName: 'Initialize CodeQL Executable and create a CodeQL database'
 
 - script: |
