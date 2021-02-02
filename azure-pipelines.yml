@@ -34,10 +34,11 @@ steps:
    --github-url https://github.com \
    --github-auth $(GitHub Token) \
   displayName: 'Initialize CodeQL Executable and create a CodeQL database'
-
+ 
 - task: MSBuild@1
   inputs:
     solution: '**/*.sln'
+    clean: true
 
 - script: |
    ./codeql-runner-linux analyze \
