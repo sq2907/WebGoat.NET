@@ -20,9 +20,9 @@ steps:
     restoreSolution: '$(solution)'
 
 - task: UseDotNet@2
-  displayName: 'Use .NET Core sdk 3.5'
+  displayName: 'Use .NET Core sdk 3.5.0'
   inputs:
-        version: 3.5
+        version: 3.5.0
         performMultiLevelLookup: true
 
 - script: |
