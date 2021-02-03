@@ -1,0 +1,42 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build $(buildConfiguration)'
+
+- script: |
+   wget https://github.com/github/codeql-action/releases/latest/download/codeql-runner-linux
+   chmod +x codeql-runner-linux
+  displayName: 'Get latest CodeQL package. Install on Agent.'
+
+- script: |
+   ./codeql-runner-linux init \
+   --repository sq2907/WebGoat.NET \
+   --github-url https://github.com \
+   --github-auth $(GitHub Token) \
+  displayName: 'Initialize CodeQL Executable and create a CodeQL database'
+ 
+
+
+- script: |
+   ./codeql-runner-linux analyze \
+   --repository sq2907/WebGoat.NET \
+   --github-url https://github.com \
+   --github-auth $(GitHub Token) \
+   --commit $(Build.SourceVersion) \
+   --ref $(Build.SourceBranch)
+  displayName: 'Populate the CodeQL runner databases, analyze them, and upload the results to GitHub.'
+
+
