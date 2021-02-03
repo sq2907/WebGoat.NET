@@ -33,8 +33,11 @@ steps:
    --repository sq2907/WebGoat.NET \
    --github-url https://github.com \
    --github-auth $(GitHub Token) \
-  displayName: 'Initialize CodeQL Executable and create a CodeQL database'
+  displayName: 'Initialize CodeQL Executable and create a CodeQL database' 
 
+- task: MSBuild@1
+  inputs:
+    solution: '**/*.sln'
 
 - script: |
    ./codeql-runner-linux analyze \
