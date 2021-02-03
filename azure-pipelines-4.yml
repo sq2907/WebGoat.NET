@@ -26,12 +26,7 @@ steps:
    chmod +x codeql-runner-linux
   displayName: 'Get latest CodeQL package. Install on Agent.'
 
-- task: MSBuild@1
-  inputs:
-    solution: '**/*.sln'
-    clean: true
-    maximumCpuCount: true
-    restoreNugetPackages: true
+
 - script: |
    ./codeql-runner-linux init \
    --repository sq2907/WebGoat.NET \
@@ -39,7 +34,11 @@ steps:
    --github-auth $(GitHub Token) \
   displayName: 'Initialize CodeQL Executable and create a CodeQL database'
  
-
+- task: MSBuild@1
+  inputs:
+    solution: '**/*.sln'
+    clean: true
+    restoreNugetPackages: true
 
 - script: |
    ./codeql-runner-linux analyze \
