@@ -20,14 +20,18 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
 
 - script: |
    wget https://github.com/github/codeql-action/releases/latest/download/codeql-runner-linux
    chmod +x codeql-runner-linux
   displayName: 'Get latest CodeQL package. Install on Agent.'
 
+- task: MSBuild@1
+  inputs:
+    solution: '**/*.sln'
+    clean: true
+    maximumCpuCount: true
+    restoreNugetPackages: true
 - script: |
    ./codeql-runner-linux init \
    --repository sq2907/WebGoat.NET \
