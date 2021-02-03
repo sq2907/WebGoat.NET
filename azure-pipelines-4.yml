@@ -19,17 +19,11 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-- task: UseDotNet@2
-  displayName: 'Use .NET Core sdk 3.1.201'
-  inputs:
-        version: 3.1.201
-        performMultiLevelLookup: true
 
 - script: |
    wget https://github.com/github/codeql-action/releases/latest/download/codeql-runner-linux
    chmod +x codeql-runner-linux
   displayName: 'Get latest CodeQL package. Install on Agent.'
-
 
 - script: |
    ./codeql-runner-linux init \
@@ -37,18 +31,11 @@ steps:
    --github-url https://github.com \
    --github-auth $(GitHub Token) \
   displayName: 'Initialize CodeQL Executable and create a CodeQL database'
-
-- task: DotNetCoreCLI@2
+ 
+- task: MSBuild@1
   inputs:
-    command: 'restore'
-    projects: '**/*.sln'
-    feedsToUse: 'select'
-
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    projects: '**/*.sln'
-
+    solution: '**/*.sln'
+    clean: true
 
 
 - script: |
@@ -59,5 +46,3 @@ steps:
    --commit $(Build.SourceVersion) \
    --ref $(Build.SourceBranch)
   displayName: 'Populate the CodeQL runner databases, analyze them, and upload the results to GitHub.'
-
-
