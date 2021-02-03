@@ -12,7 +12,6 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
-
 steps:
 
 - task: NuGetToolInstaller@1
@@ -20,6 +19,11 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk 3.5'
+  inputs:
+        version: 3.5
+        performMultiLevelLookup: true
 
 - script: |
    wget https://github.com/github/codeql-action/releases/latest/download/codeql-runner-linux
@@ -33,16 +37,18 @@ steps:
    --github-url https://github.com \
    --github-auth $(GitHub Token) \
   displayName: 'Initialize CodeQL Executable and create a CodeQL database'
- 
-- task: MSBuild@1
-  inputs:
-    solution: '**/*.sln'
-    clean: true
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
     projects: '**/*.sln'
     feedsToUse: 'select'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**/*.sln'
+
 
 
 - script: |
