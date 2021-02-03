@@ -38,7 +38,16 @@ steps:
   inputs:
     solution: '**/*.sln'
     clean: true
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '**/*.sln'
+    feedsToUse: 'select'
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**/*.sln'
 - script: |
    ./codeql-runner-linux analyze \
    --repository sq2907/WebGoat.NET \
