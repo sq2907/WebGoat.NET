@@ -37,6 +37,9 @@ steps:
 - task: MSBuild@1
   inputs:
     solution: '**/*.sln'
+    msbuildArguments: '/p:UseSharedCompilation=false'
+    clean: true
+
 
 - script: |
    ./codeql-runner-linux analyze \
