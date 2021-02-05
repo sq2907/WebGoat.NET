@@ -42,12 +42,11 @@ steps:
       
       Write-Host "Hello World"
       
-      Install-WindowsFeature Net-Framework-Core -source \\network\share\sxs
+      Enable-WindowsOptionalFeature -Online -FeatureName "NetFx3"
       
       Get-WindowsFeature
       
       dotnet build /p:UseSharedCompilation=false
-
 
 
 - script: |
