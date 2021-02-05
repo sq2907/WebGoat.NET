@@ -35,7 +35,7 @@ steps:
   displayName: 'Initialize CodeQL Executable and create a CodeQL database' 
 
 - script: |
-    ./codeql-runner/codeql-env.sh 
+    ./codeql-runner/codeql-env.sh \
     --repository sq2907/WebGoat.NET \
     --github-url https://github.com \
     --github-auth $(GitHub Token) \
