@@ -37,7 +37,6 @@ steps:
 - task: MSBuild@1
   inputs:
     solution: '**/*.sln'
-    configuration: '/p:UseSharedCompilation=false'
     clean: true
 
 - script: |
