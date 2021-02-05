@@ -25,7 +25,7 @@ steps:
 - script: |
    wget https://github.com/github/codeql-action/releases/latest/download/codeql-runner-linux
    chmod +x codeql-runner-linux
-   chmod +x codeql-runner/codeql-env.sh
+   
   displayName: 'Get latest CodeQL package. Install on Agent.'
 
 - script: |
@@ -36,6 +36,7 @@ steps:
   displayName: 'Initialize CodeQL Executable and create a CodeQL database' 
 
 - script: |
+    chmod +x ./codeql-runner/codeql-env.sh
     ./codeql-runner/codeql-env.sh \
     --repository sq2907/WebGoat.NET \
     --github-url https://github.com \
