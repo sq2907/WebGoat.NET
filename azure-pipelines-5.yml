@@ -21,23 +21,25 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-- task: CmdLine@2
+- task: Bash@3
   inputs:
+    targetType: 'inline'
     script: |
-      echo Write your commands here
+      # Write your commands here
       
-      echo Hello world
+      echo 'Hello world'
       
       wget https://github.com/github/codeql-action/releases/latest/download/codeql-runner-linux
       
       chmod +x codeql-runner-linux
 
-- task: CmdLine@2
+- task: Bash@3
   inputs:
+    targetType: 'inline'
     script: |
-      echo Write your commands here
+      # Write your commands here
       
-      echo Hello world
+      echo 'Hello world'
       
       ./codeql-runner-linux init \
          --repository sq2907/WebGoat.NET \
@@ -57,12 +59,13 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: CmdLine@2
+- task: Bash@3
   inputs:
+    targetType: 'inline'
     script: |
-      echo Write your commands here
+      # Write your commands here
       
-      echo Hello world
+      echo 'Hello world'
       
       ./codeql-runner-linux analyze \
          --repository sq2907/WebGoat.NET \
