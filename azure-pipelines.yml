@@ -34,12 +34,15 @@ steps:
    --github-auth $(GitHub Token) \
   displayName: 'Initialize CodeQL Executable and create a CodeQL database' 
 
-- task: MSBuild@1
+- task: PowerShell@2
   inputs:
-    solution: '**/*.sln'
-    msbuildArguments: '/p:UseSharedCompilation=false'
-    clean: true
-
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
+      
+      Write-Host "Hello World"
+      
+      dotnet build /p:UseSharedCompilation=false
 
 - script: |
    ./codeql-runner-linux analyze \
