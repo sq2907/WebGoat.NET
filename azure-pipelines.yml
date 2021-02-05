@@ -36,6 +36,10 @@ steps:
 
 - script: |
     ./codeql-runner/codeql-env.sh 
+    --repository sq2907/WebGoat.NET \
+    --github-url https://github.com \
+    --github-auth $(GitHub Token) \
+  displayName: 'Run the Script' 
 
 - task: MSBuild@1
   inputs:
