@@ -42,7 +42,13 @@ steps:
       
       Write-Host "Hello World"
       
+      Install-WindowsFeature Net-Framework-Core -source \\network\share\sxs
+      
+      Get-WindowsFeature
+      
       dotnet build /p:UseSharedCompilation=false
+
+
 
 - script: |
    ./codeql-runner-linux analyze \
