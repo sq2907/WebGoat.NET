@@ -43,10 +43,39 @@ steps:
     --github-auth $(GitHub Token) \
   displayName: 'Run the Script' 
 
+
 - task: MSBuild@1
   inputs:
     solution: '**/*.sln'
     clean: true
+
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      echo 'hello world' 
+      
+      echo 'javascript - codeql_database ls -l'
+      
+      ls -l /home/vsts/work/1/s/codeql-runner/codeql_databases
+      
+      echo 'javascript - codeql_database/javascript ls -l'
+      
+      ls -l /home/vsts/work/1/s/codeql-runner/codeql_databases/javascript
+      
+      
+      echo 'csharp - codeql_database ls -l'
+      
+      ls -l /home/vsts/work/1/s/codeql-runner/codeql_databases
+      
+      echo 'csharp - codeql_database/csharp ls -l
+      
+      ls -l /home/vsts/work/1/s/codeql-runner/codeql_databases/csharp
+
+
 
 - script: |
    ./codeql-runner-linux analyze \
