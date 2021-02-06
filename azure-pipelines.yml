@@ -79,6 +79,10 @@ steps:
       echo 'csharp - codeql-runner-tools'
       
       ls -l /home/vsts/codeql-runner-tools/CodeQL/0.0.0-20210127/x64/codeql/codeql
+      
+      echo 'csharp - codeql-runner-tools - cat '
+      
+      cat /home/vsts/codeql-runner-tools/CodeQL/0.0.0-20210127/x64/codeql/codeql
 
 
 
