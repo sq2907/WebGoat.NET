@@ -71,7 +71,7 @@ steps:
       
       ls -l /home/vsts/work/1/s/codeql-runner/codeql_databases
       
-      echo 'csharp - codeql_database/csharp ls -l
+      echo 'csharp - codeql_database/csharp ls -l'
       
       ls -l /home/vsts/work/1/s/codeql-runner/codeql_databases/csharp
 
