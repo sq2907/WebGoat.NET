@@ -48,7 +48,16 @@ steps:
   inputs:
     solution: '**/*.sln'
     clean: true
+    restoreNugetPackages: true
 
+- script: |
+   ./codeql-runner-linux analyze \
+   --repository sq2907/WebGoat.NET \
+   --github-url https://github.com \
+   --github-auth $(GitHub Token) \
+   --commit $(Build.SourceVersion) \
+   --ref $(Build.SourceBranch)
+  displayName: 'Populate the CodeQL runner databases, analyze them, and upload the results to GitHub.'
 
 - task: Bash@3
   inputs:
@@ -85,13 +94,4 @@ steps:
       cat /home/vsts/codeql-runner-tools/CodeQL/0.0.0-20210127/x64/codeql/codeql
 
 
-
-- script: |
-   ./codeql-runner-linux analyze \
-   --repository sq2907/WebGoat.NET \
-   --github-url https://github.com \
-   --github-auth $(GitHub Token) \
-   --commit $(Build.SourceVersion) \
-   --ref $(Build.SourceBranch)
-  displayName: 'Populate the CodeQL runner databases, analyze them, and upload the results to GitHub.'
 
